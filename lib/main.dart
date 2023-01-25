@@ -34,7 +34,20 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(),
+      body: Center(
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 300,
+              child: PageView(
+                children: [
+                  Text("test")
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
