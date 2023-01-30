@@ -1,10 +1,12 @@
+import 'package:exchange_alarmi/pages/setting_page.dart';
+import 'package:exchange_alarmi/themes/compoenets_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../components/custom_snackbar.dart';
 import 'exchange_info_page.dart';
 
 class MainBranchPage extends StatefulWidget {
-  const MainBranchPage({Key? key, this.pageIndex}) : super(key: key);
+  const MainBranchPage({Key? key, this.pageIndex = 0}) : super(key: key);
   final pageIndex;
 
   @override
@@ -14,7 +16,7 @@ class MainBranchPage extends StatefulWidget {
 class _MainBranchPageState extends State<MainBranchPage> {
   DateTime? currentBackPressTime;
   // final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _selectedPageName = ['환율 정보', '설정'];
+  final _selectedPageName = ['환율 알라미', '설정'];
   int _selectedIndex = 0;
   var _controller;
 
@@ -46,7 +48,11 @@ class _MainBranchPageState extends State<MainBranchPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_selectedPageName[_selectedIndex]),
+        centerTitle: true,
+        title: Text(
+            _selectedPageName[_selectedIndex],
+            style: ComponentsStyles.pageTitleStyle,
+        ),
       ),
       body: WillPopScope(
         onWillPop: onWillPop,
@@ -55,6 +61,7 @@ class _MainBranchPageState extends State<MainBranchPage> {
           controller: _controller,
           children: [
             ExchangeInfoPage(),
+            SettingPage(),
           ],
         ),
       ),
@@ -62,7 +69,7 @@ class _MainBranchPageState extends State<MainBranchPage> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.currency_exchange),
-              label: '환율 정보',
+              label: '환율 알라미',
               backgroundColor: Color(0xFFB3E5FC)
           ),
           BottomNavigationBarItem(

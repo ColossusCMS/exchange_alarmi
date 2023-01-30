@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:country_icons/country_icons.dart';
 
 import '../components/preferential_dropdown.dart';
-import '../themes/compoenets_styles.dart';
 
-class ExchangeInfoPage extends StatefulWidget {
-  const ExchangeInfoPage({Key? key}) : super(key: key);
+class SettingPage extends StatefulWidget {
+  const SettingPage({Key? key}) : super(key: key);
 
   @override
-  State<ExchangeInfoPage> createState() => _ExchangeInfoPageState();
+  State<SettingPage> createState() => _SettingPageState();
 }
 
-class _ExchangeInfoPageState extends State<ExchangeInfoPage> {
+class _SettingPageState extends State<SettingPage> {
   getNow() {
     DateTime now = DateTime.now();
-    DateFormat dateFormat = DateFormat('yyyy년 M월 d일 (E)', 'ko');
+    DateFormat dateFormat = DateFormat('yyyy-MM-dd (E)', 'ko');
     var strToday = dateFormat.format(now);
     return strToday;
   }
@@ -26,44 +24,23 @@ class _ExchangeInfoPageState extends State<ExchangeInfoPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.zero,
-              margin: EdgeInsets.fromLTRB(10, 20, 10, 5),
-              height: 50,
-              child: Text(
-                  getNow(),
-                  style: ComponentsStyles.dateTextStyle
-              )
+            Center(
+              child: Text(getNow()),
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color(0XFF8080ff),
-                  width: 3,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(10))
-              ),
+            SizedBox(
               child: Column(
                 children: [
                   SizedBox(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Text('(매매기준율)'),
-                        ),
+                        Text('매매기준율'),
                         SizedBox(),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                          child: Text('(단위 : 원)')
-                        ),
+                        Text('100엔')
                       ],
                     ),
                   ),
                   SizedBox(
-                    height: 72,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -71,51 +48,16 @@ class _ExchangeInfoPageState extends State<ExchangeInfoPage> {
                           fit: FlexFit.tight,
                           flex: 1,
                           child: Container(
-                            height: 72,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                top: BorderSide(
-                                  color: Color(0XFF8080ff),
-                                  width: 3
-                                ),
-                                right: BorderSide(
-                                  color: Color(0XFF8080ff),
-                                  width: 3
-                                )
-                              )
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.black,
-                                      width: 1
-                                    )
-                                  ),
-                                  child: Image.asset('icons/flags/png/jp.png', package: 'country_icons', width: 30, ),
-                                ),
-                                Text('일본(JPY)', style: ComponentsStyles.bodyTextStyle1,),
-                              ],
-                            ),
+                            child: Text('일본(JPY)'),
+                            color: Colors.redAccent,
                           ),
                         ),
                         Flexible(
-                          flex: 1,
+                          flex: 3,
                           fit: FlexFit.tight,
                           child: Container(
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    top: BorderSide(
-                                        color: Color(0XFF8080ff),
-                                        width: 3
-                                    ),
-                                )
-                            ),
-                            alignment: Alignment.centerRight,
-                            padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                            child: Text('9XX.XX', style: ComponentsStyles.exchangeTextStyle,),
+                            child: Text('9XX.XX원'),
+                            color: Colors.lightBlueAccent,
                           ),
                         )
                       ],

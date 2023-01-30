@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
     // 세로모드 고정
     [
