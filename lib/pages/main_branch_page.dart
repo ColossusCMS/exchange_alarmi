@@ -2,7 +2,6 @@ import 'package:exchange_alarmi/pages/setting_page.dart';
 import 'package:exchange_alarmi/themes/compoenets_styles.dart';
 import 'package:flutter/material.dart';
 
-import '../components/custom_snackbar.dart';
 import 'exchange_info_page.dart';
 
 class MainBranchPage extends StatefulWidget {
@@ -36,52 +35,81 @@ class _MainBranchPageState extends State<MainBranchPage> {
 
   @override
   Widget build(BuildContext context) {
-    Future<bool> onWillPop() {
-      DateTime now = DateTime.now();
-      if(currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
-        currentBackPressTime = now;
-        CustomSnackbar.snackbar(context, '뒤로 버튼을 한 번 더 누르시면 종료됩니다.', 'normal');
-        return Future.value(false);
-      }
-      return Future.value(true);
-    }
+    // Future<bool> onWillPop() {
+    //   DateTime now = DateTime.now();
+    //   if(currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+    //     currentBackPressTime = now;
+    //     CustomSnackbar.snackbar(context, '뒤로 버튼을 한 번 더 누르시면 종료됩니다.', 'normal');
+    //     return Future.value(false);
+    //   }
+    //   return Future.value(true);
+    // }
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-            _selectedPageName[_selectedIndex],
-            style: ComponentsStyles.pageTitleStyle,
-        ),
-      ),
-      body: WillPopScope(
-        onWillPop: onWillPop,
-        child: PageView(
-          physics: NeverScrollableScrollPhysics(),
-          controller: _controller,
+        title: Row(
           children: [
-            ExchangeInfoPage(),
-            SettingPage(),
+            Icon(Icons.currency_exchange),
+            SizedBox(width: 10,),
+            Text(
+              _selectedPageName[_selectedIndex],
+              style: ComponentsStyles.pageTitleStyle,
+            ),
           ],
         ),
+
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
+      body: [
+        ExchangeInfoPage(),
+        SettingPage(),
+      ][_selectedIndex],
+      // WillPopScope(
+      //   onWillPop: onWillPop,
+      //   child: PageView(
+      //     physics: NeverScrollableScrollPhysics(),
+      //     controller: _controller,
+      //     children: [
+      //       ExchangeInfoPage(),
+      //       SettingPage(),
+      //     ],
+      //   ),
+      // ),
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        selectedIndex: _selectedIndex,
+        destinations: [
+          NavigationDestination(
               icon: Icon(Icons.currency_exchange),
               label: '환율 알라미',
-              backgroundColor: Color(0xFFB3E5FC)
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
               icon: Icon(Icons.settings),
               label: '설정',
-              backgroundColor: Color(0xFFF8BBD0)
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue[800],
-        onTap: onItemTapped,
-      ),
+      )
+
+      // BottomNavigationBar(
+      //   items: [
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.currency_exchange),
+      //         label: '환율 알라미',
+      //         backgroundColor: Color(0xFFB3E5FC)
+      //     ),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.settings),
+      //         label: '설정',
+      //         backgroundColor: Color(0xFFF8BBD0)
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   selectedItemColor: Colors.blue[800],
+      //   onTap: onItemTapped,
+      // ),
     );
   }
 }

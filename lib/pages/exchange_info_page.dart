@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:country_icons/country_icons.dart';
 
 import '../components/preferential_dropdown.dart';
 import '../themes/compoenets_styles.dart';
@@ -124,7 +123,16 @@ class _ExchangeInfoPageState extends State<ExchangeInfoPage> {
                 ],
               ),
             ),
-            PreferentialDropdown(),
+            Container(
+              margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text("환율 계산기", style: ComponentsStyles.bodyTextStyle2),
+                  PreferentialDropdown(width: 150, height: 50,),
+                ],
+              ),
+            ),
             Column(
               children: [
                 SizedBox(

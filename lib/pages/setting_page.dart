@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../components/preferential_dropdown.dart';
-
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
 
@@ -66,7 +64,7 @@ class _SettingPageState extends State<SettingPage> {
                 ],
               ),
             ),
-            PreferentialDropdown(),
+            // PreferentialDropdown(),
             Column(
               children: [
                 SizedBox(
