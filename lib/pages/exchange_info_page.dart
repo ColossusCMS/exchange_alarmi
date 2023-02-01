@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../components/preferential_dropdown.dart';
-import '../themes/compoenets_styles.dart';
+import '../themes/components_styles.dart';
 
 class ExchangeInfoPage extends StatefulWidget {
   const ExchangeInfoPage({Key? key}) : super(key: key);

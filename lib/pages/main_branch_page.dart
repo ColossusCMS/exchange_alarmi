@@ -1,5 +1,5 @@
 import 'package:exchange_alarmi/pages/setting_page.dart';
-import 'package:exchange_alarmi/themes/compoenets_styles.dart';
+import 'package:exchange_alarmi/themes/components_styles.dart';
 import 'package:flutter/material.dart';
 
 import 'exchange_info_page.dart';
