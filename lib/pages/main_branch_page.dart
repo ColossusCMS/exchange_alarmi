@@ -35,21 +35,22 @@ class _MainBranchPageState extends State<MainBranchPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Future<bool> onWillPop() {
-    //   DateTime now = DateTime.now();
-    //   if(currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
-    //     currentBackPressTime = now;
-    //     CustomSnackbar.snackbar(context, '뒤로 버튼을 한 번 더 누르시면 종료됩니다.', 'normal');
-    //     return Future.value(false);
-    //   }
-    //   return Future.value(true);
-    // }
+    Future<bool> onWillPop() {
+      DateTime now = DateTime.now();
+      if(currentBackPressTime == null || now.difference(currentBackPressTime!) > Duration(seconds: 2)) {
+        currentBackPressTime = now;
+        // CustomSnackbar.snackbar(context, '뒤로 버튼을 한 번 더 누르시면 종료됩니다.', 'normal');
+        return Future.value(false);
+      }
+      return Future.value(true);
+    }
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: (_selectedIndex == 0) ? Color(0xFFE1DFFF) : Color(0xFFFFDAD6),
         title: Row(
           children: [
-            Icon(Icons.currency_exchange),
+            Icon(Icons.currency_exchange, color: Color(0xFF22CCCC)),
             SizedBox(width: 10,),
             Text(
               _selectedPageName[_selectedIndex],
@@ -59,27 +60,23 @@ class _MainBranchPageState extends State<MainBranchPage> {
         ),
 
       ),
-      body: [
-        ExchangeInfoPage(),
-        SettingPage(),
-      ][_selectedIndex],
-      // WillPopScope(
-      //   onWillPop: onWillPop,
-      //   child: PageView(
-      //     physics: NeverScrollableScrollPhysics(),
-      //     controller: _controller,
-      //     children: [
-      //       ExchangeInfoPage(),
-      //       SettingPage(),
-      //     ],
-      //   ),
-      // ),
+      body:
+      WillPopScope(
+        onWillPop: onWillPop,
+        child: PageView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: _controller,
+          children: [
+            ExchangeInfoPage(),
+            SettingPage(),
+          ],
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
+          onItemTapped(index);
         },
+        backgroundColor: (_selectedIndex == 0) ? Color(0xFFE1DFFF) : Color(0xFFFFDAD6),
         selectedIndex: _selectedIndex,
         destinations: [
           NavigationDestination(
@@ -92,24 +89,6 @@ class _MainBranchPageState extends State<MainBranchPage> {
           ),
         ],
       )
-
-      // BottomNavigationBar(
-      //   items: [
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.currency_exchange),
-      //         label: '환율 알라미',
-      //         backgroundColor: Color(0xFFB3E5FC)
-      //     ),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.settings),
-      //         label: '설정',
-      //         backgroundColor: Color(0xFFF8BBD0)
-      //     ),
-      //   ],
-      //   currentIndex: _selectedIndex,
-      //   selectedItemColor: Colors.blue[800],
-      //   onTap: onItemTapped,
-      // ),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:exchange_alarmi/pages/main_branch_page.dart';
 import 'package:exchange_alarmi/stores/exchange_store.dart';
-import 'package:exchange_alarmi/themes/color_schemes.g.dart';
+import 'package:exchange_alarmi/themes/custom_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -24,15 +24,9 @@ void main() async {
         ChangeNotifierProvider(create: (c) => ExchangeStore()),
       ],
       child: MaterialApp(
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: lightColorScheme
-        ),
-        darkTheme: ThemeData(
-          useMaterial3: true,
-          colorScheme: darkColorScheme
-        ),
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.light,
+        theme: lightTheme,
+        darkTheme: darkTheme,
         localizationsDelegates: const[
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,

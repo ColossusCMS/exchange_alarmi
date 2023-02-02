@@ -8,7 +8,7 @@ class ComponentsStyles {
 
   static const TextStyle dateTextStyle = TextStyle(
     color: Colors.black,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: FontWeight.bold,
   );
 
