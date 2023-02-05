@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constaints.dart';
 
+// 스낵바 컴포넌트
 class CustomSnackbar {
   static snackbar(context, message, type) {
     ScaffoldMessenger.of(context).showSnackBar(

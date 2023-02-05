@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 환율우대 드롭박스
 class PreferentialDropdown extends StatefulWidget {
   const PreferentialDropdown({Key? key, required this.width, required this.height}) : super(key: key);
   final double width;
@@ -16,7 +17,8 @@ class _PreferentialDropdownState extends State<PreferentialDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      margin: EdgeInsets.fromLTRB(10, 5, 0, 10),
       width: widget.width,
       height: widget.height,
       child: DropdownButtonFormField(
