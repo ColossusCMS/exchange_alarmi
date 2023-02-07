@@ -24,8 +24,16 @@ class _CountryContainerState extends State<CountryContainer> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            CountryComponent(countryName: widget.countryCode, borderWidth: 1),
-            ExchangeDataField(countryCode: widget.countryCode),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: CountryComponent(countryName: widget.countryCode, borderWidth: 1),
+            ),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: ExchangeDataField(countryCode: widget.countryCode),
+            )
           ],
         ),
       ),
