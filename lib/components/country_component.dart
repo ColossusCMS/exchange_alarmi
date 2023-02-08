@@ -16,10 +16,10 @@ class _CountryComponentState extends State<CountryComponent> {
   Widget build(BuildContext context) {
     return Container( // 국기 + 국가명
       decoration: BoxDecoration(
-        border: Border.all(
-          width: widget.borderWidth,
-          color: Colors.red
-        )
+        // border: Border.all(
+        //   width: widget.borderWidth,
+        //   color: Colors.red
+        // )
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

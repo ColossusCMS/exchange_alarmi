@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:exchange_alarmi/components/country_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -25,21 +22,45 @@ class _ExchangeInfoBoxState extends State<ExchangeInfoBox> {
 
   @override
   Widget build(BuildContext context) {
+    bool isChecked = false;
+    Color getColor(Set<MaterialState> states) {
+      Set<MaterialState> interactiveStates = {
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if(states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Colors.red;
+    }
+
     return Container(
       margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 0, 5),
+            padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("환율정보", style: TextStyle(fontSize: 24),),
-                SizedBox(width: 10,),
-                Text(
-                  getNow(),
-                  style: ComponentsStyles.dateTextStyle,
+                Container(
+                  child: Row(
+                    children: [
+                      Text("환율정보", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                      SizedBox(width: 10,),
+                      Text(
+                        getNow(),
+                        style: ComponentsStyles.dateTextStyle,
+                      ),
+                    ],
+                  ),
                 ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  child: ElevatedButton.icon(onPressed: () {}, icon: Icon(Icons.refresh), label: Text('새로고침'))
+                )
               ],
             ),
           ),
@@ -54,29 +75,37 @@ class _ExchangeInfoBoxState extends State<ExchangeInfoBox> {
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                  child: Text('(매매기준율)'),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(5, 0, 5, 15),
-                  // height: 90,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      CountryContainer(countryCode: 'jp',),
-                      Flexible( // =
-                        fit: FlexFit.tight,
-                        flex: 1,
-                        child: SizedBox(
-                            height: 72,
-                            child: Transform.rotate(
-                              angle: 90 * pi/180,
-                              child: Icon(Icons.pause_circle, size: 50, color: Color(0xFF405AA9)),
-                            )
-                        ),
-                      ),
-                      CountryContainer(countryCode: 'kr',),
+                      Checkbox(
+                          value: isChecked,
+                          fillColor: MaterialStateProperty.resolveWith(getColor),
+                          
+                          onChanged: (bool? value) {
+                            setState(() {
+                              isChecked = value!;
+                            });
+                          }),
+                      Text('선택한 국가만 보기'),
+                      SizedBox(width: 20,),
+                      ElevatedButton(onPressed: () {}, child: Text('국가선택'))
                     ],
-                  ),
+                  )
+                ),
+                RefreshIndicator(
+                  onRefresh: () async {
+
+                  },
+                  child: SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Text('Content Number : $index');
+                      },
+                      itemCount: 50,
+                    ),
+                  )
                 )
               ],
             ),

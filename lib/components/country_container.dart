@@ -5,8 +5,10 @@ import 'exchange_data_field.dart';
 
 // 국가 정보 + 환율 필드
 class CountryContainer extends StatefulWidget {
-  const CountryContainer({Key? key, required this.countryCode}) : super(key: key);
+  const CountryContainer({Key? key, required this.countryCode, required this.subTitle, required this.editingController}) : super(key: key);
   final String countryCode;
+  final String subTitle;
+  final TextEditingController editingController;
 
   @override
   State<CountryContainer> createState() => _CountryContainerState();
@@ -19,21 +21,42 @@ class _CountryContainerState extends State<CountryContainer> {
       fit: FlexFit.tight,
       flex: 4,
       child: Container(
-        margin: EdgeInsets.fromLTRB(0, 0, 15, 0),
-        height: 72,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+        decoration: BoxDecoration(
+          // border: Border.all(
+          //   color: Colors.green,
+          //   width: 2
+          // )
+        ),
+        // height: 120,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              fit: FlexFit.tight,
-              flex: 1,
-              child: CountryComponent(countryName: widget.countryCode, borderWidth: 1),
+            Container(
+              margin: EdgeInsets.fromLTRB(10, 5, 0, 5),
+              decoration: BoxDecoration(
+                // border: Border.all(
+                //   color: Colors.pink,
+                //   width: 2
+                // )
+              ),
+              child: Text('(${widget.subTitle})', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
             ),
-            Flexible(
-              fit: FlexFit.tight,
-              flex: 1,
-              child: ExchangeDataField(countryCode: widget.countryCode),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 1,
+                  child: CountryComponent(countryName: widget.countryCode, borderWidth: 1),
+                ),
+                Flexible(
+                  fit: FlexFit.tight,
+                  flex: 1,
+                  child: ExchangeDataField(countryCode: widget.countryCode, controller: widget.editingController,),
+                )
+              ],
+            ),
           ],
         ),
       ),

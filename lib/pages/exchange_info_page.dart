@@ -17,8 +17,8 @@ class _ExchangeInfoPageState extends State<ExchangeInfoPage> {
       child: Column(
         children: [
           SizedBox(height: 30,),
-          ExchangeInfoBox(),
           ExchangeCalComponent(),
+          ExchangeInfoBox(),
         ],
       ),
     );
