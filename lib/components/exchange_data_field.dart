@@ -42,6 +42,7 @@ class _ExchangeDataFieldState extends State<ExchangeDataField> {
         decoration: InputDecoration(
           counter: Text('100엔'),
           contentPadding: EdgeInsets.fromLTRB(0, 5, 5, 0),
+          hintText: '0'
         ),
         keyboardType: TextInputType.number,
         controller: widget.controller,

@@ -22,6 +22,8 @@ class _ExchangeInfoBoxState extends State<ExchangeInfoBox> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> list = ['4', '3', '2', '1'];
+
     bool isChecked = false;
     Color getColor(Set<MaterialState> states) {
       Set<MaterialState> interactiveStates = {
@@ -101,9 +103,9 @@ class _ExchangeInfoBoxState extends State<ExchangeInfoBox> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return Text('Content Number : $index');
+                        return Text(list[index]);
                       },
-                      itemCount: 50,
+                      itemCount: list.length,
                     ),
                   )
                 )
