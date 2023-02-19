@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../themes/components_styles.dart';
+import 'exchange_rate_info_box.dart';
 
 // 환율정보 박스
 class ExchangeInfoBox extends StatefulWidget {
@@ -22,7 +23,7 @@ class _ExchangeInfoBoxState extends State<ExchangeInfoBox> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> list = ['4', '3', '2', '1'];
+    // List<String> list = ['4', '3', '2', '1'];
 
     bool isChecked = false;
     Color getColor(Set<MaterialState> states) {
@@ -99,13 +100,13 @@ class _ExchangeInfoBoxState extends State<ExchangeInfoBox> {
 
                   },
                   child: SizedBox(
-                    height: 300,
+                    height: 400,
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return Text(list[index]);
+                        return ExchangeRateInfoBox();
                       },
-                      itemCount: list.length,
+                      itemCount: 6,
                     ),
                   )
                 )

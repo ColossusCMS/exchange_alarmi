@@ -48,7 +48,7 @@ class _CountryContainerState extends State<CountryContainer> {
                 Flexible(
                   fit: FlexFit.tight,
                   flex: 1,
-                  child: CountryComponent(countryName: widget.countryCode, borderWidth: 1),
+                  child: CountryComponent(countryCode: widget.countryCode, borderWidth: 0),
                 ),
                 Flexible(
                   fit: FlexFit.tight,

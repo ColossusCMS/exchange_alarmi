@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../stores/exchange_store.dart';
 
 // 환율 데이터 필드
 class ExchangeDataField extends StatefulWidget {
@@ -13,6 +16,15 @@ class ExchangeDataField extends StatefulWidget {
 }
 
 class _ExchangeDataFieldState extends State<ExchangeDataField> {
+  var _moneyUnit = '';
+
+  getCountryData() async {
+    await context.read<ExchangeStore>().getCountryCode(widget.countryCode);
+    setState(() {
+      _moneyUnit = context.read<ExchangeStore>().countryData[2];
+    });
+  }
+
   convertText(String inParam) {
     var format = NumberFormat('###,###,###.##');
     return format.format(int.parse(inParam));
@@ -40,7 +52,7 @@ class _ExchangeDataFieldState extends State<ExchangeDataField> {
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
         textAlign: TextAlign.end,
         decoration: InputDecoration(
-          counter: Text('100엔'),
+          counter: Text(_moneyUnit),
           contentPadding: EdgeInsets.fromLTRB(0, 5, 5, 0),
           hintText: '0'
         ),
